@@ -1,0 +1,17 @@
+.codex/
+.next/
+.vinext/
+.wrangler/
+dist/
+node_modules/
+output/
+outputs/
+work/
+
+.env*
+!.env.example
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+next-env.d.ts
