@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+const staleContextTerms = [
+  "codex-preview",
+  "starter project",
+  "taking shape",
+  `Hannah ${"Huffman"}`,
+  `Nauto${"bot"}`,
+];
+
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
@@ -30,9 +38,19 @@ test("server-renders the production planner", async () => {
   assert.match(html, /Carolina Beach,[\s\S]*planned in 3 minutes/i);
   assert.match(html, /Build my 3-stop plan/i);
   assert.match(html, /Carolina Beach Market/i);
+  assert.match(html, /Nollie&#x27;s Taco Joint|Nollie's Taco Joint/i);
+  assert.match(html, /HopLite Irish Pub/i);
+  assert.match(html, /Pleasure Island Design/i);
+  assert.match(html, /Angels Auto Repair/i);
+  assert.match(html, /Generals of Chaos/i);
+  assert.match(html, /Island Gazette/i);
+  assert.match(html, /St\. Joseph Street Marina \+ Boat Ramp 411/i);
   assert.match(html, /Tony Silvagni Surf School/i);
   assert.match(html, /Beach 411, before your feet hit the sand/i);
-  assert.doesNotMatch(html, /codex-preview|starter project|taking shape/i);
+  assert.match(html, /More signal, less scrolling/i);
+  for (const term of staleContextTerms) {
+    assert.doesNotMatch(html, new RegExp(term, "i"));
+  }
 });
 
 test("renders source-first external links", async () => {
@@ -41,6 +59,12 @@ test("renders source-first external links", async () => {
 
   assert.match(html, /https:\/\/www\.carolinabeach\.gov\/201\/Carolina-Beach-Market/i);
   assert.match(html, /https:\/\/www\.carolinabeach\.gov\/249\/Parking/i);
+  assert.match(html, /https:\/\/hopliterestaurant\.com\//i);
+  assert.match(html, /https:\/\/www\.pleasureislanddesign\.com\//i);
+  assert.match(html, /https:\/\/www\.google\.com\/maps\/search\/\?api=1/i);
+  assert.match(html, /https:\/\/www\.islandgazette\.net\//i);
+  assert.match(html, /https:\/\/www\.ncparks\.gov\/state-parks\/carolina-beach-state-park\/facilities/i);
+  assert.match(html, /https:\/\/www\.ncwildlife\.gov\/boating\/boating-access-areas/i);
   assert.match(html, /https:\/\/cbboardwalk\.com\//i);
   assert.match(html, /https:\/\/www\.weather\.gov\/safety\/ripcurrent/i);
 });

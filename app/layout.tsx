@@ -11,7 +11,8 @@ const geist = Geist({
 
 const title = "Carolina Beach Local Vendors & Beach Vibes 411";
 const description =
-  "Build a Carolina Beach day in three minutes with current local spots, beach essentials, and locally inspired swag.";
+  "Build a Carolina Beach day in three minutes with local vendors, beach essentials, marina access, news links, and locally inspired swag.";
+const productionOrigin = "https://carolina-beach-local-411.willyd61.chatgpt.site";
 
 export const viewport: Viewport = {
   colorScheme: "light",
@@ -22,9 +23,9 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
-  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "carolina-beach-local-411.sites.openai.com";
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? "https";
-  const base = new URL(`${protocol}://${host}`);
+  const host = requestHeaders.get("host") ?? "";
+  const isLocalHost = /^(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/i.test(host);
+  const base = new URL(isLocalHost ? `http://${host}` : productionOrigin);
 
   return {
     metadataBase: base,
@@ -32,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     applicationName: "Carolina Beach 411",
     category: "travel",
-    keywords: ["Carolina Beach", "local vendors", "beach guide", "Carolina Beach Boardwalk", "North Carolina travel"],
+    keywords: ["Carolina Beach", "local vendors", "beach guide", "Carolina Beach Boardwalk", "marina", "North Carolina travel"],
     openGraph: {
       type: "website",
       locale: "en_US",

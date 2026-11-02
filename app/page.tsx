@@ -9,8 +9,11 @@ import {
   Compass,
   ExternalLink,
   Heart,
+  Info,
   MapPin,
   Menu,
+  Newspaper,
+  Palette,
   Search,
   ShoppingBag,
   Sparkles,
@@ -21,7 +24,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useDeferredValue, useMemo, useState, useSyncExternalStore } from "react";
-import { categories, dayparts, quickPlans, swagItems, vendors, type Category, type Daypart } from "./data";
+import { categories, dayparts, holidayThemes, quickPlans, swagItems, townNews, vendors, type Category, type Daypart, type HolidayTheme } from "./data";
 
 const EMPTY_LIST = "[]";
 
@@ -89,6 +92,7 @@ export default function Home() {
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const [route, setRoute] = usePersistentList("route");
   const [savedSwag, setSavedSwag] = usePersistentList("swag");
+  const [holidayTheme, setHolidayTheme] = useState<HolidayTheme>("default");
 
   const visibleVendors = useMemo(() => {
     const matches = vendors.filter((vendor) => {
@@ -126,7 +130,7 @@ export default function Home() {
   };
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell theme-${holidayTheme}`}>
       <a className="skip-link" href="#main-content">Skip to planner</a>
 
       <header className="site-header">
@@ -151,6 +155,8 @@ export default function Home() {
         <nav className={mobileNavOpen ? "site-nav is-open" : "site-nav"} aria-label="Primary navigation">
           <a href="#directory" onClick={() => setMobileNavOpen(false)}>Find a spot</a>
           <a href="#beach-411" onClick={() => setMobileNavOpen(false)}>Beach 411</a>
+          <a href="#local-intel" onClick={() => setMobileNavOpen(false)}>Local intel</a>
+          <a href="#themes" onClick={() => setMobileNavOpen(false)}>Themes</a>
           <a href="#swag" onClick={() => setMobileNavOpen(false)}>Swag</a>
           <a className="route-link" href="#my-route" onClick={() => setMobileNavOpen(false)}>
             <Bookmark aria-hidden="true" /> My route <span>{route.length}</span>
@@ -228,6 +234,36 @@ export default function Home() {
             <span><strong>Rides are open</strong><small>Daily · 5-11 PM</small></span>
             <ChevronRight />
           </a>
+          <a href="https://www.carolinabeach.gov/306/Municipal-Marina-Mooring-Field" target="_blank" rel="noreferrer">
+            <span className="pulse-icon water"><Waves /></span>
+            <span><strong>Harbor check</strong><small>Reservations required</small></span>
+            <ChevronRight />
+          </a>
+        </section>
+
+        <section className="theme-section" id="themes" aria-labelledby="themes-title">
+          <div className="section-intro">
+            <div>
+              <p className="eyebrow"><Palette aria-hidden="true" /> SEASONAL CONTROL</p>
+              <h2 id="themes-title">Set the island mood.</h2>
+            </div>
+            <p>Apply a holiday skin when you need one. The theme changes colour accents and atmosphere only; it never changes civic facts, vendor details, or event dates.</p>
+          </div>
+          <div className="theme-picker" role="toolbar" aria-label="Choose a holiday theme">
+            {holidayThemes.map((theme) => (
+              <button
+                key={theme.id}
+                type="button"
+                className={holidayTheme === theme.id ? "is-active" : ""}
+                aria-pressed={holidayTheme === theme.id}
+                onClick={() => setHolidayTheme(theme.id)}
+              >
+                <span>{theme.label}</span>
+                <small>{theme.note}</small>
+              </button>
+            ))}
+          </div>
+          <p className="theme-status" aria-live="polite"><Sparkles aria-hidden="true" /> Active theme: <strong>{holidayThemes.find((theme) => theme.id === holidayTheme)?.label}</strong>. Saved for this visit.</p>
         </section>
 
         <section className="directory-section" id="directory" aria-labelledby="directory-title">
@@ -236,7 +272,7 @@ export default function Home() {
               <p className="eyebrow">LOCAL SHORTLIST</p>
               <h2 id="directory-title">Find your next stop.</h2>
             </div>
-            <p>Independent favorites, official essentials, and experiences worth leaving the beach chair for.</p>
+            <p>Independent favorites, services, local news, water access, and official essentials worth checking before the plan gets moving.</p>
           </div>
 
           <div className="category-tabs" role="toolbar" aria-label="Filter local spots by category">
@@ -373,7 +409,59 @@ export default function Home() {
             <article><span>01</span><h3>Parking season</h3><p>Paid town parking is enforced March 1 through October 31, generally 9 AM-8 PM. Check signs and current rates.</p><a href="https://www.carolinabeach.gov/249/Parking" target="_blank" rel="noreferrer">Parking details <ExternalLink /></a></article>
             <article><span>02</span><h3>Boardwalk access</h3><p>The raised oceanfront boardwalk has public access points, seating, showers, foot washes, and restroom facilities.</p><a href="https://www.carolinabeach.gov/298/Boardwalk-District" target="_blank" rel="noreferrer">Boardwalk guide <ExternalLink /></a></article>
             <article><span>03</span><h3>Thursday energy</h3><p>Summer boardwalk nights pair amusement rides with live bands and fireworks. Weather can change plans.</p><a href="https://cbboardwalk.com/" target="_blank" rel="noreferrer">Check the latest <ExternalLink /></a></article>
-            <article><span>04</span><h3>Ocean first</h3><p>Read posted flags, swim near lifeguards, hydrate early, and treat rip-current guidance as non-negotiable.</p><a href="https://www.weather.gov/safety/ripcurrent" target="_blank" rel="noreferrer">NOAA safety <ExternalLink /></a></article>
+            <article><span>04</span><h3>Boat ramp 411</h3><p>Carolina Beach State Park lists a 54-slip marina with two public ramps, fuel, supplies, restrooms, and launch fees.</p><a href="https://www.ncparks.gov/state-parks/carolina-beach-state-park/facilities" target="_blank" rel="noreferrer">State Park ramps <ExternalLink /></a></article>
+            <article><span>05</span><h3>NC Wildlife access</h3><p>Use the NC Wildlife boating access locator for free public access areas, closures, accessibility, and caution notes.</p><a href="https://www.ncwildlife.gov/boating/boating-access-areas" target="_blank" rel="noreferrer">Find ramps <ExternalLink /></a></article>
+            <article><span>06</span><h3>Ocean first</h3><p>Read posted flags, swim near lifeguards, hydrate early, and treat rip-current guidance as non-negotiable.</p><a href="https://www.weather.gov/safety/ripcurrent" target="_blank" rel="noreferrer">NOAA safety <ExternalLink /></a></article>
+          </div>
+        </section>
+
+        <section className="intel-section" id="local-intel" aria-labelledby="intel-title">
+          <div className="section-intro">
+            <div>
+              <p className="eyebrow">LOCAL INTEL</p>
+              <h2 id="intel-title">More signal, less scrolling.</h2>
+            </div>
+            <p>Fast source links for the pieces visitors usually need after they pick food, music, a ramp, or a beach access point.</p>
+          </div>
+          <div className="intel-grid">
+            <article>
+              <Newspaper aria-hidden="true" />
+              <h3>News + local context</h3>
+              <p>Island Gazette remains useful as a legacy Carolina Beach news archive. Active publishing/contact details should be verified before treating it as a current paper.</p>
+              <a href="https://www.islandgazette.net/" target="_blank" rel="noreferrer">Open Island Gazette <ExternalLink /></a>
+            </article>
+            <article>
+              <Waves aria-hidden="true" />
+              <h3>Marina + mooring</h3>
+              <p>The Town Municipal Marina and Mooring Field serves ICW mile marker 295 with reservations, dinghy docks, pump-out stations, and harbor master support.</p>
+              <a href="https://www.carolinabeach.gov/306/Municipal-Marina-Mooring-Field" target="_blank" rel="noreferrer">Town marina info <ExternalLink /></a>
+            </article>
+            <article>
+              <Info aria-hidden="true" />
+              <h3>Visitor center</h3>
+              <p>The Pleasure Island Chamber visitor center at 1121 North Lake Park Boulevard is the current source for guides, events, and island questions.</p>
+              <a href="https://carolina-beach.wilmingtonandbeaches.com/about/island-info/visitor-information-center/" target="_blank" rel="noreferrer">Visitor info <ExternalLink /></a>
+            </article>
+          </div>
+        </section>
+
+        <section className="news-section" id="town-news" aria-labelledby="town-news-title">
+          <div className="section-intro">
+            <div>
+              <p className="eyebrow"><Newspaper aria-hidden="true" /> TOWN NEWS</p>
+              <h2 id="town-news-title">What’s moving on the island.</h2>
+            </div>
+            <p>Curated from the Town of Carolina Beach’s public news, recreation, and holiday pages. Dates and schedules should be rechecked before publishing a promotion.</p>
+          </div>
+          <div className="news-grid">
+            {townNews.map((item) => (
+              <article className={`news-card ${item.kind}`} key={item.id}>
+                <div className="news-meta"><span>{item.label}</span><time>{item.date}</time></div>
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+                <a href={item.url} target="_blank" rel="noreferrer">Read the source <ExternalLink aria-hidden="true" /></a>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -415,7 +503,7 @@ export default function Home() {
           <a href="https://cbboardwalk.com/" target="_blank" rel="noreferrer">Boardwalk Amusements</a>
           <a href="#top">Back to top ↑</a>
         </div>
-        <small>Information checked July 2026. Hours, rates, weather, and seasonal schedules can change; confirm with each linked source before heading out.</small>
+        <small>Information checked November 2, 2026. Hours, rates, weather, access rules, and seasonal schedules can change; confirm with each linked source before heading out.</small>
       </footer>
     </div>
   );

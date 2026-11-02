@@ -1,0 +1,33 @@
+name: Vendor source update
+description: Request an update to a local vendor or source-backed listing.
+title: "vendor: update "
+labels: ["content", "vendor"]
+body:
+  - type: input
+    id: vendor
+    attributes:
+      label: Vendor or listing
+      description: Which Carolina Beach vendor, service, news source, or access point needs an update?
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source URL
+      description: Link to the official or best available source for the requested change.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Requested change
+      description: Describe what should change and why.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I checked that this belongs to the Carolina Beach 411 project.
+          required: true
