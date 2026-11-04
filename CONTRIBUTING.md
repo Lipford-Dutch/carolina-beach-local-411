@@ -1,27 +1,28 @@
 # Contributing
 
-## Development
+## Workflow
 
-Use Node.js 22.13 or newer.
+1. Open or reference an issue before material work.
+2. Branch from current `main` using a short descriptive name.
+3. Install exactly from the lockfile with `npm ci`.
+4. Keep changes scoped and preserve source links for factual content.
+5. Run `npm run check` before opening a pull request.
+6. Use Conventional Commits and complete the pull request checklist.
 
-```powershell
-npm install
-npm run dev
-```
+## Content Rules
 
-## Standards
+- Link new vendor, Town, visitor, marina, event, and safety claims to a current
+  first-party or authoritative source.
+- Mark community-provided details as pending when they cannot be verified.
+- Do not convert seasonal presentation themes into factual event claims.
+- Keep unrelated client material and private files out of this repository.
 
-- Keep changes scoped to the Carolina Beach 411 product.
-- Add source links for new vendor, civic, event, marina, or visitor claims.
-- Label unverifiable local knowledge as a stub or pending verification.
-- Preserve accessibility for keyboard, screen-reader, touch, and reduced-motion
-  users.
-- Do not add GitHub Actions workflows before the organization merge window
-  unless the owner explicitly approves it.
+## Engineering Rules
 
-## Validation
-
-```powershell
-npm run lint
-npm run test
-```
+- Preserve keyboard, screen-reader, touch, mobile, and reduced-motion behavior.
+- Do not add analytics, accounts, payments, or a database without an approved
+  architecture and privacy review.
+- Never commit credentials, `.env` files, deployment tokens, or generated build
+  directories.
+- Treat lint, tests, static packaging, and production dependency audit as the
+  minimum merge gate.

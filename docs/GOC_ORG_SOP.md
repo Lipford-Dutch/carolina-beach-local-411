@@ -5,8 +5,8 @@
 - Confirm the repository name, owner, visibility, and destination organization.
 - Confirm whether the existing Sites deployment remains the production channel.
 - Verify there are no unrelated project references before publishing.
-- Keep GitHub Actions dormant until the final merge window unless the owner
-  explicitly enables CI earlier.
+- Confirm GitHub Actions, Pages, and security features are allowed by the
+  organization before the first protected-branch change.
 
 ## Repository Standards
 
@@ -28,8 +28,12 @@
 
 ## GitHub Landing Standard
 
-- Create an owner-approved branch before pushing to GitHub.
+- For a new empty repository, import the validated existing history to `main`
+  before enabling its ruleset; use pull requests for subsequent changes.
 - Use Conventional Commits for local commits.
-- Open a draft pull request for organization review.
-- Reconfirm intent before merge when the PR head changes.
-- Do not claim hosted CI status when GitHub Actions are disabled or unavailable.
+- Require CI and CodeQL after their exact check names have run at least once.
+- Keep workflow permissions least-privilege and pin supported major action tags.
+- Verify the Pages URL and repository security settings rather than inferring
+  success from workflow files alone.
+- Keep Hostinger publishing manual until a credential-safe deployment design is
+  approved.

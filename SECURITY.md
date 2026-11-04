@@ -1,25 +1,29 @@
 # Security Policy
 
-## Supported Versions
+## Supported Version
 
-This project is pre-1.0 and currently supports the latest `main` branch only.
+The latest commit on `main` is the only supported version.
 
-## Reporting A Vulnerability
+## Report A Vulnerability
 
-Report vulnerabilities privately to the repository owner or organization
-security contact after the GitHub uplift destination is confirmed.
+Use the repository's **Security > Report a vulnerability** workflow. Do not
+open a public issue for suspected vulnerabilities or include credentials,
+cookies, personal information, or exploit details in public discussions.
 
-Please include:
+Include the affected route or file, impact, reproduction steps, and a safe proof
+of concept. The maintainer will acknowledge a complete report, assess severity,
+and coordinate disclosure after a fix is available.
 
-- A clear description of the issue.
-- Steps to reproduce.
-- Affected files or routes.
-- Any screenshots or logs that do not contain secrets.
+## Baseline Controls
 
-## Security Expectations
+- GitHub Actions use least-privilege permissions and current supported majors.
+- CI blocks high and critical dependency findings in production dependencies.
+- CodeQL, dependency review, Dependabot, and secret scanning are expected to be
+  enabled at the repository level.
+- Hostinger's `.htaccess` applies CSP, anti-framing, MIME-sniffing, referrer,
+  browser-capability, and cache controls.
+- The application does not require accounts, payment data, or server-side
+  storage; route and swag selections remain device-local.
 
-- Do not commit credentials, tokens, cookies, or private customer data.
-- Keep vendor content source-backed and avoid scraping private account content.
-- Keep saved route and swag state device-local unless explicit persistence is
-  designed and reviewed.
-- Review dependency updates before publishing.
+Security headers complement dependency review and secure hosting configuration;
+they do not replace them.

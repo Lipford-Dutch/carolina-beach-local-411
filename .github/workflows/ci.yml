@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate and package
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Run release checks
+        run: npm run check
+
+      - name: Reject high-severity development advisories
+        run: npm audit --audit-level=high
+
+      - name: Upload Hostinger package
+        uses: actions/upload-artifact@v7
+        with:
+          name: hostinger-package-${{ github.sha }}
+          path: hostinger-dist/
+          if-no-files-found: error
+          retention-days: 14

@@ -1,38 +1,50 @@
 {
   "name": "carolina-beach-local-vendors-and-beach-vibes-411",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "A fast local guide and beach-day planner for Carolina Beach, North Carolina.",
+  "homepage": "https://lipford-dutch.github.io/carolina-beach-local-411/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lipford-Dutch/carolina-beach-local-411.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lipford-Dutch/carolina-beach-local-411/issues"
+  },
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "node node_modules/vinext/dist/cli.js dev",
-    "build": "node node_modules/vinext/dist/cli.js build",
+    "dev": "node node_modules/vite/bin/vite.js dev",
+    "build": "node node_modules/vite/bin/vite.js build",
+    "build:hostinger": "npm run build && node --import ./scripts/register-cloudflare-loader.mjs scripts/build-static-hostinger.mjs",
+    "check": "npm run lint && npm run test && npm run build:hostinger && npm run audit:prod",
+    "audit:prod": "npm audit --omit=dev --audit-level=high",
     "start": "node node_modules/vinext/dist/cli.js start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "lint": "node node_modules/eslint/bin/eslint.js . --ignore-pattern dist --ignore-pattern .next"
+    "test": "npm run build && node --import ./scripts/register-cloudflare-loader.mjs --test tests/rendered-html.test.mjs",
+    "lint": "node node_modules/eslint/bin/eslint.js . --ignore-pattern dist --ignore-pattern .next --ignore-pattern hostinger-dist --ignore-pattern .playwright-cli"
   },
+  "packageManager": "npm@11.6.2",
   "dependencies": {
     "lucide-react": "1.24.0",
-    "next": "16.2.6",
-    "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.37.1",
+    "@cloudflare/vite-plugin": "1.67.0",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
-    "@vitejs/plugin-rsc": "0.5.26",
+    "@vitejs/plugin-rsc": "0.5.37",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
-    "react-server-dom-webpack": "19.2.6",
+    "eslint-config-next": "16.4.5",
+    "react-server-dom-webpack": "19.3.1",
     "typescript": "5.9.3",
-    "vinext": "0.0.50",
-    "vite": "8.0.13",
-    "wrangler": "4.92.0"
+    "vinext": "1.4.3",
+    "vite": "8.3.5",
+    "wrangler": "4.156.1"
   },
   "type": "module"
 }

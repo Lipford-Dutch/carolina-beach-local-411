@@ -12,9 +12,12 @@
 
 - [ ] `npm run lint`
 - [ ] `npm run test`
+- [ ] `npm run build:hostinger`
+- [ ] `npm run audit:prod`
 - [ ] Stale-context search completed
 
-## Uplift Notes
+## Deployment Notes
 
-- [ ] GitHub Actions remain dormant unless explicitly approved.
-- [ ] Sites deployment status, if changed, is documented.
+- [ ] Sites, GitHub Pages, and Hostinger impacts are documented.
+- [ ] New public configuration uses least privilege and contains no secrets.
+- [ ] The handoff is updated when operational ownership or release steps change.

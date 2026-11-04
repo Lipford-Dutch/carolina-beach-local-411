@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Private security report
+    url: https://github.com/Lipford-Dutch/carolina-beach-local-411/security/advisories/new
+    about: Report suspected vulnerabilities privately rather than in a public issue.
   - name: Carolina Beach source update
     url: https://www.carolinabeach.gov/
     about: Confirm town-operated details at the official source before filing.

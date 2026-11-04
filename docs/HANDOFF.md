@@ -52,19 +52,25 @@ selector.
   listing, but its current first-party web presence still needs confirmation.
 - Generals of Chaos needs a verified category, address, phone, description, and
   official link before it should be promoted beyond a community listing.
-- No GitHub remote is configured in this checkout yet.
-- No GitHub Actions workflow is included, keeping CI dormant for organization
-  intake.
+- The target remote is `Lipford-Dutch/carolina-beach-local-411`; remote creation
+  and publication must be verified separately from local preparation.
+- CI, CodeQL, dependency review, Pages, and Hostinger packaging are prepared.
+  Their hosted status is not complete until the repository is published and
+  successful workflow runs are observed.
 
 ## Validation
 
-Run these before pushing to GitHub:
+Run the full release gate before pushing to GitHub:
 
 ```powershell
-npm run lint
-npm run test
+npm ci
+npm run check
+npm audit --audit-level=high
 rg -n "<known unrelated project terms>" .
 ```
+
+The authoritative migration continuation is
+`docs/SESSION_HANDOFF_2026-11-04.md`.
 
 ## Next Phase
 

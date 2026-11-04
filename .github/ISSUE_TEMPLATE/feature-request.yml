@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose a focused improvement to the guide or delivery workflow.
+title: "feat: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What should become easier or more useful for visitors or maintainers?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Proposed scope
+      description: Describe the smallest useful change and any content sources it needs.
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Project boundaries
+      options:
+        - label: This request belongs to Carolina Beach Local 411 and does not import unrelated project content.
+          required: true
