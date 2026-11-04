@@ -10,8 +10,15 @@ Pages project home, and prepare a validated Hostinger release path.
 
 - Organization: `Lipford-Dutch`
 - Repository: `carolina-beach-local-411`
-- Intended visibility: public
+- Repository URL:
+  `https://github.com/Lipford-Dutch/carolina-beach-local-411`
+- Visibility: public
 - Local branch: `main`
+- Initial published commit: `6c5d6ca5162717eabbcf88aa89a9ecddae5ef339`
+- GitHub Pages URL:
+  `https://lipford-dutch.github.io/carolina-beach-local-411/`
+- Organization project:
+  `https://github.com/orgs/Lipford-Dutch/projects/17`
 - Current Sites deployment:
   `https://carolina-beach-local-411.willyd61.chatgpt.site/`
 
@@ -52,15 +59,48 @@ Vinext emits non-failing source-map and dynamic-import build warnings. Node 26
 also warns that `module.register()` is deprecated; CI targets Node 22.13, where
 the loader registration remains compatible.
 
-## GitHub Publication Sequence
+## GitHub Publication State
 
-1. Create the public repository without starter files.
-2. Add `origin` and push the existing `main` history.
-3. Confirm CI, CodeQL, dependency review, and Pages workflows complete.
-4. Enable the security settings listed in `REPOSITORY_SETTINGS.md`.
-5. Apply the main-branch ruleset after exact workflow check names exist.
-6. Create **Carolina Beach Local 411 Delivery** from `PROJECT_BOARD.md` and add
-   the seed issues.
+- The public repository was created and `main` was pushed to `origin`.
+- The unpublished local history was rewritten before the first successful push
+  to use `willyd61@users.noreply.github.com`, preventing GitHub email-privacy
+  rejection without changing any commit trees or messages.
+- Repository metadata includes the Pages homepage, description, and the topics
+  `carolina-beach`, `local-guide`, `nextjs`, `react`, `typescript`, `vinext`,
+  `github-pages`, and `hostinger`.
+- GitHub Pages uses GitHub Actions. The final handoff commit triggers a clean
+  Pages, CI, and CodeQL verification run after Pages was enabled.
+- Release immutability, squash-only merging, automatic head-branch deletion,
+  auto-merge, and pull-request branch update suggestions are enabled.
+- Dependency graph, Dependabot alerts and security updates, malware alerts,
+  private vulnerability reporting, CodeQL advanced setup, secret scanning, and
+  push protection are enabled. Grouped Dependabot security updates remain off;
+  version-update grouping is defined in `.github/dependabot.yml`.
+- Five Dependabot pull requests were opened automatically. They were not merged
+  during migration and require normal review and CI.
+- The active `Protect main` ruleset is configured for the default branch with
+  organization-admin bypass, deletion and force-push protection, linear
+  history, one approving review, stale-approval dismissal, CODEOWNER review,
+  and conversation resolution. GitHub required a fresh mobile verification to
+  finish saving the ruleset; confirm the ruleset appears under repository
+  settings before treating this one control as complete.
+
+## Organization Project and Backlog
+
+**Carolina Beach Local 411 Delivery** is organization project `#17`. It is
+private by design and linked to the public repository. The product-launch
+template supplies a prioritized backlog, status board, current iteration,
+roadmap, bug and personal views, seven enabled workflows, and fields for status,
+priority, team, size, estimate, iteration, start date, and target date.
+
+The project README documents the operating agreement and Hostinger release
+gate. Five open issues were imported:
+
+- `#6` Configure production Hostinger hostname and deploy validated package.
+- `#7` Verify Angels Auto Repair first-party listing details.
+- `#8` Verify Generals of Chaos listing details and official link.
+- `#9` Recheck seasonal dates and vendor details before holiday campaigns.
+- `#10` Decide Town News managed-content approach.
 
 ## Hostinger Takeover
 
@@ -90,7 +130,10 @@ Local preparation and validation are distinct from GitHub publication, Pages
 deployment, organization project creation, and Hostinger production deployment.
 Only mark each step complete after its remote state is verified.
 
-At handoff time, GitHub CLI authentication for `willyd61` is invalid and no
-remote is configured. Remote repository, Pages, organization project, settings,
-and Hostinger deployment therefore remain pending until authenticated action is
-approved and completed.
+At handoff time, the repository, issues, project, metadata, security settings,
+and Pages configuration are published. GitHub CLI authentication for
+`willyd61` is still invalid; browser and GitHub-connector authentication were
+used for remote administration. Hostinger production deployment remains
+pending because the production hostname and authenticated Hostinger access were
+not supplied. Do not claim that deployment until the backup, upload, HTTPS,
+redirect, route, header, and rollback checks in `HOSTINGER_DEPLOYMENT.md` pass.
