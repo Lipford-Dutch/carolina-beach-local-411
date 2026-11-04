@@ -69,7 +69,9 @@ the loader registration remains compatible.
   `carolina-beach`, `local-guide`, `nextjs`, `react`, `typescript`, `vinext`,
   `github-pages`, and `hostinger`.
 - GitHub Pages uses GitHub Actions. The final handoff commit triggers a clean
-  Pages, CI, and CodeQL verification run after Pages was enabled.
+  Pages, CI, and CodeQL verification run after Pages was enabled. Manual Pages
+  run `41907694936` completed successfully and the public project home was
+  verified in a browser.
 - Release immutability, squash-only merging, automatic head-branch deletion,
   auto-merge, and pull-request branch update suggestions are enabled.
 - Dependency graph, Dependabot alerts and security updates, malware alerts,
@@ -81,9 +83,15 @@ the loader registration remains compatible.
 - The active `Protect main` ruleset is configured for the default branch with
   organization-admin bypass, deletion and force-push protection, linear
   history, one approving review, stale-approval dismissal, CODEOWNER review,
-  and conversation resolution. GitHub required a fresh mobile verification to
-  finish saving the ruleset; confirm the ruleset appears under repository
-  settings before treating this one control as complete.
+  conversation resolution, up-to-date branches, and required `Validate and
+  package` and `Analyze JavaScript and TypeScript` checks. GitHub verified the
+  saved control by reporting the ruleset bypass during the final direct handoff
+  push.
+- For commit `56d0d1a`, CI run `41907622451`, CodeQL run `41907622278`, and
+  Pages run `41907694936` completed successfully. CI produced the Hostinger
+  artifact and the live Pages project home rendered correctly.
+- GitHub reported one moderate dependency advisory after publication. Keep it
+  in the Dependabot review queue; do not bypass normal test and review gates.
 
 ## Organization Project and Backlog
 
