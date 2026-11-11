@@ -34,17 +34,17 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.67.0",
     "@types/node": "22.19.19",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.2",
-    "@vitejs/plugin-rsc": "0.5.37",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "@vitejs/plugin-rsc": "0.5.39",
     "eslint": "9.39.4",
     "eslint-config-next": "16.4.5",
     "react-server-dom-webpack": "19.3.1",
     "typescript": "5.9.3",
-    "vinext": "1.4.3",
-    "vite": "8.3.5",
-    "wrangler": "4.156.1"
+    "vinext": "1.4.4",
+    "vite": "8.3.6",
+    "wrangler": "4.158.0"
   },
   "type": "module"
 }
